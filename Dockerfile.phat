@@ -1,0 +1,26 @@
+FROM cgr.dev/chainguard/wolfi-base:latest
+
+RUN apk add make git nodejs npm pnpm
+
+RUN npm install -g npm
+
+# Setup chrome for things like Playwright
+RUN mkdir -p /opt/google/chrome && \
+    apk add chromium && \
+    ln -sf /usr/bin/chromium-browser /opt/google/chrome/chrome
+
+RUN mkdir -p /home/user && chown -R 1000:0 /home/user && chown -R 1000:0 /usr/local
+
+USER 1000
+
+ENV HOME=/home/user
+ENV DOCKER_CONTAINER=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+WORKDIR /home/user
+
+RUN npm install -g supergateway
+
+ENTRYPOINT ["supergateway"]
+
+CMD ["--help"]

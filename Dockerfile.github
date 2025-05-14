@@ -1,0 +1,7 @@
+FROM ghcr.io/github/github-mcp-server as binary
+
+FROM ghcr.io/thedadams/phat-mcp
+
+COPY --from=binary /server/github-mcp-server .
+
+CMD ["--stdio", "./github-mcp-server stdio", "--port", "8080", "--healthEndpoint", "/healthz"]
