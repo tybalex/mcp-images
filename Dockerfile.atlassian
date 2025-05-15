@@ -1,0 +1,5 @@
+FROM ghcr.io/sooperset/mcp-atlassian:0.10
+
+ENV CONFLUENCE_URL=https://your-company.atlassian.net/wiki
+
+CMD ["--transport", "sse", "--port", "8080"]
