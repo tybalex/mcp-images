@@ -1,7 +1,15 @@
 FROM ghcr.io/github/github-mcp-server as binary
 
-FROM ghcr.io/thedadams/phat-mcp
+FROM ghcr.io/obot-platform/mcp-images-phat:latest
 
 COPY --from=binary /server/github-mcp-server .
 
-CMD ["--stdio", "./github-mcp-server stdio", "--port", "8080", "--healthEndpoint", "/healthz"]
+USER root
+
+COPY scripts/entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh", "./github-mcp-server stdio"]
+
+USER 1000

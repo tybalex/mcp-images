@@ -1,5 +1,18 @@
 FROM ghcr.io/sooperset/mcp-atlassian:0.10
 
+USER root
+
+RUN apk add make git nodejs npm pnpm
+
+RUN npm install -g supergateway
+
 ENV CONFLUENCE_URL=https://your-company.atlassian.net/wiki
 
-CMD ["--transport", "sse", "--port", "8080"]
+
+COPY scripts/entrypoint.sh .
+
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh", "mcp-atlassian"]
+
+USER app
