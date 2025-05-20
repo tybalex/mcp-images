@@ -1,6 +1,6 @@
 FROM cgr.dev/chainguard/wolfi-base:latest
 
-RUN apk add make git nodejs npm pnpm
+RUN apk add make git nodejs npm pnpm python3
 
 RUN npm install -g npm
 
@@ -9,7 +9,7 @@ RUN mkdir -p /opt/google/chrome && \
     apk add chromium && \
     ln -sf /usr/bin/chromium-browser /opt/google/chrome/chrome
 
-RUN mkdir -p /home/user && chown -R 1000:0 /home/user && chown -R 1000:0 /usr/local
+RUN mkdir -p /home/user/.local/bin && chown -R 1000:0 /home/user && chown -R 1000:0 /usr/local
 
 USER 1000
 
@@ -18,6 +18,14 @@ ENV DOCKER_CONTAINER=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 WORKDIR /home/user
+
+ENV PATH="/home/user/.local/bin:$PATH"
+# Enable bytecode compilation
+ENV UV_COMPILE_BYTECODE=1
+# Copy from the cache instead of linking since it's a mounted volume
+ENV UV_LINK_MODE=copy
+
+RUN python -m ensurepip && pip3 install uvx
 
 RUN npm install -g supergateway
 
