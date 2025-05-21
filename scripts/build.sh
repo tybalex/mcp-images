@@ -15,5 +15,5 @@ fi
 
 for f in $(ls Dockerfile.*); do
     echo Building $f
-    docker build -t $repo${f#Dockerfile.}-mcp:latest $push -f $f .
+    docker build -t ${repo}mcp-images-${f#Dockerfile.}:main $push -f $f .
 done
