@@ -22,6 +22,6 @@ RUN chown 1000 nanobot.yaml
 
 ENTRYPOINT ["nanobot"]
 
-CMD ["run", "--listen-address", ":8099", "./nanobot.yaml"]
+CMD ["run", "--listen-address", ":8099", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "./nanobot.yaml"]
 
 USER 1000
