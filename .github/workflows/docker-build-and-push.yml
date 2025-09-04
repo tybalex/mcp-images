@@ -21,10 +21,17 @@ jobs:
           - phat
           - github
           - hubspot
+          - tableau
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Clone Tableau MCP repository
+        if: matrix.image-identifier == 'tableau'
+        uses: actions/checkout@v4
+        with:
+          repository: tableau/tableau-mcp
+          path: tableau-mcp
       - name: Setup Depot
         uses: depot/setup-action@v1
       - name: Log in to GitHub Container Registry
@@ -44,10 +51,10 @@ jobs:
         id: build-and-push
         with:
           project: bbqjs4tj1g
-          context: .
+          context: ${{ matrix.image-identifier == 'tableau' && './tableau-mcp' || '.' }}
           push: true
           pull: true
-          file: Dockerfile.${{ matrix.image-identifier }}
+          file: ${{ matrix.image-identifier == 'tableau' && './Dockerfile.tableau' || format('Dockerfile.{0}', matrix.image-identifier) }}
           platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ github.repository }}-${{ matrix.image-identifier }}:${{ github.ref_name }}
