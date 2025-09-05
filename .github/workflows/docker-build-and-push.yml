@@ -22,6 +22,7 @@ jobs:
           - github
           - hubspot
           - tableau
+          - elasticsearch
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
