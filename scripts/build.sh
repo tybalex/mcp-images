@@ -13,10 +13,7 @@ if [[ -n "${BASE_REPO}" ]]; then
 fi
 
 
-
 for f in $(ls Dockerfile.*); do
     echo Building $f
     docker build -t ${repo}mcp-images-${f#Dockerfile.}:main $push -f $f .
 done
-
-
