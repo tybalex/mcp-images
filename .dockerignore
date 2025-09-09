@@ -1,0 +1,7 @@
+Dockerfile*
+.git
+.github
+License
+Makefile
+scripts
+repackaging
