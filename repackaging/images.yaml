@@ -1,0 +1,122 @@
+images:
+  - name: antv-charts
+    type: node
+    protocol: http
+    package: "@antv/mcp-server-chart"
+    version: 0.8.3
+    command: mcp-server-chart --transport streamable --endpoint "/" --port 1122
+  - name: atlassian
+    type: docker
+    package: ghcr.io/sooperset/mcp-atlassian
+    version: latest
+    command: --transport streamable-http --port 9000
+  - name: aws-cdk
+    type: python
+    protocol: stdio
+    package: awslabs.cdk-mcp-server
+    version: 1.0.7
+  - name: aws-documentation
+    type: python
+    protocol: stdio
+    package: awslabs.aws-documentation-mcp-server
+    version: 1.1.6
+  - name: aws-eks
+    type: python
+    protocol: stdio
+    package: awslabs.eks-mcp-server
+    version: 0.1.13
+    command: awslabs.eks-mcp-server --allow-write --allow-sensitive-data-access
+  - name: aws-kendra
+    type: python
+    protocol: stdio
+    package: awslabs.amazon-kendra-index-mcp-server
+    version: 1.0.6
+  - name: aws-redshift
+    type: python
+    protocol: stdio
+    package: awslabs.redshift-mcp-server
+    version: 0.0.7
+  - name: azure
+    type: node
+    protocol: stdio
+    package: "@azure/mcp"
+    version: latest
+    # @TODO FINISH COMMAND
+    command: server start
+  - name: browserbase
+    type: node
+    protocol: stdio
+    package: "@browserbasehq/mcp-server-browserbase"
+    version: 2.0.1
+  - name: context7
+    type: node
+    protocol: stdio
+    package: "@upstash/context7-mcp"
+    version: 1.0.16
+  - name: datadog
+    type: node
+    protocol: stdio
+    package: "@winor30/mcp-server-datadog"
+    version: latest
+  - name: duckduckgo-search
+    type: python
+    protocol: stdio
+    package: duckduckgo-mcp-server
+    version: 0.1.1
+  - name: elasticsearch
+    type: docker
+    protocol: http
+    package: awslabs.cdk-mcp-server
+    version: 1.0.7
+  - name: exa-search
+    protocol: npx
+    package: exa-mcp-server
+    version: 2.0.3
+    command: exa-mcp-server --tools=web_search_exa,research_paper_search,company_research,crawling,competitor_finder,linkedin_search,wikipedia_search_exa,github_search
+  - name: firecrawl
+    type: node
+    protocol: stdio
+    package: firecrawl-mcp
+    version: 2.0.2
+  - name: mongodb-atlas
+    type: node
+    protocol: stdio
+    package: mongodb-mcp-server
+    version: 0.3.0
+    command: mongodb-mcp-server --transport http --httpPort 3000 --disabledTools mongodb
+  - name: mongodb-database
+    type: node
+    protocol: stdio
+    package: mongodb-mcp-server
+    version: 0.3.0
+    command: mongodb-mcp-server --transport http --httpPort 3000 --connectionString ${CONNECTION_STRING}
+  - name: mysql
+    type: python
+    protocol: stdio
+    package: mysql-mcp-server
+    command: mysql_mcp_server
+  - name: playwright
+    type: node
+    protocol: stdio
+    package: "@playwright/mcp"
+    version: 0.0.35
+  - name: postgresql
+    type: python
+    protocol: stdio
+    package: postgres-mcp
+    command: postgres-mcp --accessMode=unrestricted
+  - name: supabase
+    type: node
+    protocol: stdio
+    package: "@supabase/mcp-server-supabase"
+    version: 0.5.1
+  - name: tavily
+    type: node
+    protocol: stdio
+    package: tavily-mcp
+    version: 0.2.9
+  - name: wordpress
+    type: node
+    protocol: stdio
+    package: "@automattic/mcp-server-remote"
+    version: 0.2.10

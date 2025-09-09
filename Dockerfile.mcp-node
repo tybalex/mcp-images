@@ -1,0 +1,21 @@
+ARG BASE_TAG=main
+FROM ghcr.io/obot-platform/mcp-images-base-node:${BASE_TAG}
+
+ARG MCP_PACKAGE
+ARG MCP_VERSION
+ARG MCP_COMMAND
+
+USER root
+
+# Install the MCP package globally
+RUN npm install -g "${MCP_PACKAGE}@${MCP_VERSION}"
+
+RUN cat > /usr/local/bin/entrypoint.sh << 'EOF' && chmod +x /usr/local/bin/entrypoint.sh
+#!/bin/bash
+${MCP_COMMAND}
+EOF
+
+USER 1000
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["--help"]

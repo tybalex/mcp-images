@@ -23,6 +23,10 @@ jobs:
           - hubspot
           - tableau
           - elasticsearch
+          - base-python
+          - base-node
+          - mcp-node
+          - mcp-python
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
