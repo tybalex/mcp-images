@@ -131,15 +131,6 @@ jobs:
           done
           cosign sign --yes ${images}
 
-      # - name: Copy image to latest tag
-      #   if: ${{ github.ref_type == 'tag' && !contains(github.ref_name, '-rc') }}
-      #   run: |
-      #     if [[ "${{ matrix.type }}" == "docker" ]]; then
-      #       crane tag ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }} latest
-      #     else
-      #       crane tag ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }} latest
-      #     fi
-
       - name: Run Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:

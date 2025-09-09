@@ -1,5 +1,5 @@
 ARG BASE_TAG=main
-FROM ghcr.io/obot-platform/mcp-images/node:${BASE_TAG}
+FROM ghcr.io/obot-platform/mcp-images-base-node:${BASE_TAG}
 
 ARG MCP_PACKAGE
 ARG MCP_VERSION
@@ -14,7 +14,6 @@ RUN cat > /usr/local/bin/entrypoint.sh << 'EOF' && chmod +x /usr/local/bin/entry
 #!/bin/bash
 ${MCP_COMMAND}
 EOF
-
 
 USER 1000
 
