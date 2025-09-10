@@ -59,12 +59,8 @@ images:
     package: duckduckgo-mcp-server
     version: 0.1.1
     command: "duckduckgo-mcp-server"
-  - name: elasticsearch
-    type: docker
-    package: awslabs.cdk-mcp-server
-    version: 1.0.7
-    command: "awslabs.cdk-mcp-server"
   - name: exa-search
+    type: node
     package: exa-mcp-server
     version: 2.0.3
     command: exa-mcp-server --tools=web_search_exa,research_paper_search,company_research,crawling,competitor_finder,linkedin_search,wikipedia_search_exa,github_search
@@ -83,9 +79,10 @@ images:
     package: mongodb-mcp-server
     version: 0.3.0
     command: mongodb-mcp-server --transport http --httpPort 3000 --connectionString ${CONNECTION_STRING}
-  - name: mysql
+  - name: mysql-mcp-server
     type: python
     package: mysql-mcp-server
+    version: 0.2.2
     command: mysql_mcp_server
   - name: playwright
     type: node
@@ -95,6 +92,7 @@ images:
   - name: postgresql
     type: python
     package: postgres-mcp
+    version: 0.3.0
     command: postgres-mcp --accessMode=unrestricted
   - name: supabase
     type: node
