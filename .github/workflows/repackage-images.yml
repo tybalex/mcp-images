@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push python-based image
-        if: ${{ matrix.type }} == 'python'
+        if: ${{ matrix.type == 'python' }}
         uses: depot/build-push-action@v1
         id: build-python
         with:
@@ -69,7 +69,7 @@ jobs:
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
 
       - name: Build and push node-based image
-        if: ${{ matrix.type }} == 'node'
+        if: ${{ matrix.type == 'node' }}
         uses: depot/build-push-action@v1
         id: build-node
         with:
@@ -88,11 +88,11 @@ jobs:
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
 
       - name: Setup crane
-        if: ${{ matrix.type }} == 'docker'
+        if: ${{ matrix.type == 'docker' }}
         uses: imjasonh/setup-crane@v0.4
 
       - name: Retag existing docker image
-        if: ${{ matrix.type }} == 'docker'
+        if: ${{ matrix.type == 'docker' }}
         run: |
           crane copy ${{ matrix.package }}:${{ matrix.version }} ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
 
@@ -102,7 +102,7 @@ jobs:
           cosign-release: "v2.4.3"
 
       - name: Sign python image
-        if: ${{ matrix.type }} == 'python'
+        if: ${{ matrix.type == 'python' }}
         env:
           DIGEST: ${{ steps.build-python.outputs.digest }}
           TAGS: |
@@ -117,7 +117,7 @@ jobs:
           cosign sign --yes ${images}
 
       - name: Sign node image
-        if: ${{ matrix.type }} == 'node'
+        if: ${{ matrix.type == 'node' }}
         env:
           DIGEST: ${{ steps.build-node.outputs.digest }}
           TAGS: |
