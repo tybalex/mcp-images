@@ -10,7 +10,7 @@ USER root
 # Install the MCP package globally
 RUN npm install -g "${MCP_PACKAGE}@${MCP_VERSION}"
 
-RUN cat > /usr/local/bin/entrypoint.sh << 'EOF' && chmod +x /usr/local/bin/entrypoint.sh
+RUN cat > /usr/local/bin/entrypoint.sh <<EOF && chmod +x /usr/local/bin/entrypoint.sh
 #!/bin/bash
 ${MCP_COMMAND}
 EOF
