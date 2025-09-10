@@ -25,7 +25,7 @@ jobs:
       - name: Generate matrix from images.yaml
         id: set-matrix
         run: |
-          matrix=$(yq eval -o=json '.images[] | select(.type != null) | {name, type, package, version, command}' repackaging/images.yaml | jq -s .)
+          matrix=$(yq eval -o=json '.images[] |select(.type != null) |= pick(["name", "type", "package","version","command"])' repackaging/images.yaml |jq -cs .)
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   repackage:
