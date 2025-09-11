@@ -22,6 +22,7 @@ jobs:
           - github
           - hubspot
           - tableau
+          - snowflake
           - elasticsearch
           - base-python
           - base-node
