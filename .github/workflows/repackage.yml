@@ -13,6 +13,8 @@ on:
       - main
     tags:
       - "v*"
+    paths:
+      - repackaging/**
 
 jobs:
   generate-matrix:
@@ -70,7 +72,7 @@ jobs:
           context: .
           push: true
           pull: true
-          file: Dockerfile.mcp-python
+          file: repackaging/Dockerfile.mcp-python
           platforms: linux/amd64,linux/arm64
           build-args: |
             MCP_PACKAGE=${{ matrix.package }}
@@ -88,7 +90,7 @@ jobs:
           context: .
           push: true
           pull: true
-          file: Dockerfile.mcp-node
+          file: repackaging/Dockerfile.mcp-node
           platforms: linux/amd64,linux/arm64
           build-args: |
             MCP_PACKAGE=${{ matrix.package }}
