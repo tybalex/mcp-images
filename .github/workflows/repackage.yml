@@ -156,11 +156,12 @@ jobs:
         if: steps.check-image.outputs.exists == 'true' || steps.build-python.outputs.digest != '' || steps.build-node.outputs.digest != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
+          category: trivy-${{ matrix.name }}-${{ matrix.version }}
           sarif_file: trivy-results-${{ matrix.name }}-${{ matrix.version }}.sarif
 
       - name: Generate SBOM
         if: steps.check-image.outputs.exists == 'true'
-        uses: anchore/sbom-action@v0.20.5
+        uses: anchore/sbom-action@v0.20
         with:
           image: ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
           artifact-name: sbom-${{ matrix.name }}-${{ matrix.version }}.spdx.json
