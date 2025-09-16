@@ -19,7 +19,3 @@ ENV UV_LINK_MODE=copy
 RUN python -m ensurepip && pip3 install uv
 
 USER 1000
-
-ENTRYPOINT ["nanobot"]
-
-CMD ["--help"]

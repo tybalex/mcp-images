@@ -12,19 +12,17 @@ on:
       - main
     tags:
       - "v*"
+    paths:
+      - Dockerfile.base-python
+      - Dockerfile.base-node
+      - Dockerfile.phat
 jobs:
   docker-build:
     strategy:
       fail-fast: false
       matrix:
         image-identifier:
-          - nanobot
           - phat
-          - github
-          - hubspot
-          - tableau
-          - snowflake
-          - elasticsearch
           - base-python
           - base-node
     runs-on: depot-ubuntu-22.04
@@ -37,14 +35,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{secrets.GHCR_USERNAME }}
-          password: ${{ secrets.GHCR_TOKEN }}
-      - name: Log in to Docker Hub
-        if: ${{ github.ref_type == 'tag' && !contains(github.ref_name, '-rc') }}
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         uses: depot/build-push-action@v1
         id: build-and-push
@@ -56,8 +48,7 @@ jobs:
           file: Dockerfile.${{ matrix.image-identifier }}
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository }}-${{ matrix.image-identifier }}:${{ github.ref_name }}
-            ${{ github.ref_type == 'tag' && !contains(github.ref_name, '-rc') && format('docker.io/obot/{0}-{1}:{2}', github.event.repository.name, matrix.image-identifier, github.ref_name) || '' }}
+            ghcr.io/${{ github.repository }}/${{ matrix.image-identifier }}:${{ github.ref_name }}
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3.8.1
         with:
@@ -68,8 +59,7 @@ jobs:
         env:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
           TAGS: |
-            ghcr.io/${{ github.repository }}-${{ matrix.image-identifier }}:${{ github.ref_name }}
-            ${{ github.ref_type == 'tag' && !contains(github.ref_name, '-rc') && format('docker.io/obot/{0}-{1}:{2}', github.event.repository.name, matrix.image-identifier, github.ref_name) || '' }}
+            ghcr.io/${{ github.repository }}/${{ matrix.image-identifier }}:${{ github.ref_name }}
         run: |
           images=""
           for tag in ${TAGS}; do
@@ -81,12 +71,11 @@ jobs:
       - name: Copy image to latest tag
         if: ${{ github.ref_type == 'tag' && !contains(github.ref_name, '-rc') }}
         run: |
-          crane tag ghcr.io/${{ github.repository }}-${{ matrix.image-identifier }}:${{ github.ref_name }} latest
-          crane tag docker.io/obot/${{ github.event.repository.name }}-${{ matrix.image-identifier }}:${{ github.ref_name }} latest
+          crane tag ghcr.io/${{ github.repository }}/${{ matrix.image-identifier }}:${{ github.ref_name }} latest
       - name: Run Trivy
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: ghcr.io/${{ github.repository }}-${{ matrix.image-identifier }}:${{ github.ref_name }}
+          image-ref: ghcr.io/${{ github.repository }}/${{ matrix.image-identifier }}:${{ github.ref_name }}
           skip-dirs: "**/venv"
           format: "sarif"
           output: "trivy-results-${{ matrix.image-identifier }}.sarif"
