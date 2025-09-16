@@ -1,4 +1,4 @@
-FROM ghcr.io/obot-platform/mcp-images-nanobot:main
+FROM ghcr.io/obot-platform/mcp-images/nanobot:main
 
 USER root
 
