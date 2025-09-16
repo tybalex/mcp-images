@@ -16,7 +16,3 @@ RUN mkdir -p /opt/google/chrome && \
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 USER 1000
-
-ENTRYPOINT ["nanobot"]
-
-CMD ["--help"]
