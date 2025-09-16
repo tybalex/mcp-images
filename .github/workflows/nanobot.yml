@@ -17,8 +17,6 @@ on:
       - scripts/nanobot.sh
 jobs:
   docker-build:
-    strategy:
-      fail-fast: false
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
