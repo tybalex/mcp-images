@@ -25,6 +25,7 @@ jobs:
           - tableau
           - snowflake
           - elasticsearch
+          - googlecloudrun
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
