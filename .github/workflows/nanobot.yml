@@ -39,6 +39,8 @@ jobs:
         id: build-and-push
         with:
           project: bbqjs4tj1g
+          build-contexts: |
+            nanobot=./nanobot
           context: .
           push: true
           pull: true
