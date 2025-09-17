@@ -161,7 +161,7 @@ jobs:
 
       - name: Generate SBOM
         if: steps.check-image.outputs.exists == 'true'
-        uses: anchore/sbom-action@v0.20
+        uses: anchore/sbom-action@v0.20.6
         with:
           image: ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
           artifact-name: sbom-${{ matrix.name }}-${{ matrix.version }}.spdx.json
