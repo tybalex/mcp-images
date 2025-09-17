@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Checkout nanobot
+        uses: actions/checkout@v4
+        with:
+          repository: nanobot-ai/nanobot
+          path: nanobot
       - name: Setup Depot
         uses: depot/setup-action@v1
       - name: Log in to GitHub Container Registry
@@ -90,7 +95,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: ./.github/workflows/mcp-servers.yml
+      - uses: .github/workflows/mcp-servers.yml
 
   build-repackaged-images:
     needs: build-base-images
@@ -98,4 +103,4 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: ./.github/workflows/repackage.yml
+      - uses: .github/workflows/repackage.yml
