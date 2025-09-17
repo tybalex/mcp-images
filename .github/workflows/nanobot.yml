@@ -75,3 +75,27 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-results-nanobot.sarif
+
+  build-base-images:
+    needs: docker-build
+    runs-on: depot-ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: ./.github/workflows/base-images.yml
+
+  build-mcp-servers-images:
+    needs: build-base-images
+    runs-on: depot-ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: ./.github/workflows/mcp-servers.yml
+
+  build-repackaged-images:
+    needs: build-base-images
+    runs-on: depot-ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: ./.github/workflows/repackage.yml

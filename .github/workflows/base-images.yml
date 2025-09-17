@@ -6,6 +6,7 @@ permissions:
   actions: read
   security-events: write
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches:
