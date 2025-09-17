@@ -87,7 +87,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: ./.github/workflows/base-images.yml
+      - uses: obot-platform/mcp-images/.github/workflows/base-images.yml@main
 
   build-mcp-servers-images:
     needs: build-base-images
@@ -95,7 +95,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: .github/workflows/mcp-servers.yml
+      - uses: obot-platform/mcp-images/.github/workflows/mcp-servers.yml@main
 
   build-repackaged-images:
     needs: build-base-images
@@ -103,4 +103,4 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: .github/workflows/repackage.yml
+      - uses: obot-platform/mcp-images/.github/workflows/repackage.yml@main
