@@ -109,3 +109,8 @@ images:
     package: "@automattic/mcp-wordpress-remote"
     version: 0.2.10
     command: "mcp-wordpress-remote"
+  - name: digicalocean
+    type: node
+    package: "@digitalocean/mcp"
+    version: 1.0.10
+    command: "mcp --services ${ENABLED_SERVICES}"
