@@ -112,5 +112,5 @@ images:
   - name: digicalocean
     type: node
     package: "@digitalocean/mcp"
-    version: latest
+    version: 1.0.10
     command: "mcp --services ${ENABLED_SERVICES}"
