@@ -69,6 +69,10 @@ images:
     package: firecrawl-mcp
     version: 2.0.2
     command: "firecrawl-mcp"
+  - name: gitlab
+    type: node
+    package: "@zereight/mcp-gitlab"
+    version: 2.0.4
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
