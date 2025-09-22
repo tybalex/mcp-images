@@ -153,6 +153,8 @@ def find_latest_version(tags, current_tag):
 
 def compare_versions(v1, v2):
     """Compare two version strings"""
+    if v1 == 'latest' or v2 == 'latest':
+        return 0
     try:
         norm_v1 = normalize_version(v1)
         norm_v2 = normalize_version(v2)
