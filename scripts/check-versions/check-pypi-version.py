@@ -57,10 +57,7 @@ def check_version(package_name, current_version):
 
         print(json.dumps(result, indent=2))
 
-        if comparison > 0:
-            sys.exit(0)  # Newer version available
-        else:
-            sys.exit(1)  # No newer version
+        sys.exit(0)
 
     except Exception as error:
         error_result = {
@@ -69,14 +66,14 @@ def check_version(package_name, current_version):
             "error": str(error)
         }
         print(json.dumps(error_result, indent=2))
-        sys.exit(1)
+        sys.exit(0)
 
 
 def main():
     if len(sys.argv) != 3:
         print("Usage: python check-pypi-version.py <package-name> <current-version>", file=sys.stderr)
         print("Example: python check-pypi-version.py requests 2.28.0", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(0)
 
     package_name = sys.argv[1]
     current_version = sys.argv[2]

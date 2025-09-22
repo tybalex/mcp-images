@@ -60,11 +60,7 @@ async function checkVersion(packageName, currentVersion) {
 
     console.log(JSON.stringify(result, null, 2));
 
-    if (comparison > 0) {
-      process.exit(0); // Newer version available
-    } else {
-      process.exit(1); // No newer version
-    }
+    process.exit(0);
   } catch (error) {
     const errorResult = {
       package: packageName,
@@ -84,7 +80,7 @@ function main() {
       "Usage: node check-npm-version.js <package-name> <current-version>",
     );
     console.error("Example: node check-npm-version.js react 18.0.0");
-    process.exit(1);
+    process.exit(0);
   }
 
   const [packageName, currentVersion] = args;

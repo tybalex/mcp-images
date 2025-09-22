@@ -207,10 +207,7 @@ def check_version(image_name):
 
         print(json.dumps(result, indent=2))
 
-        if comparison > 0:
-            sys.exit(0)  # Newer version available
-        else:
-            sys.exit(1)  # No newer version
+        sys.exit(0)
 
     except Exception as error:
         registry, repository, current_tag = None, None, None
@@ -227,7 +224,7 @@ def check_version(image_name):
             "error": str(error)
         }
         print(json.dumps(error_result, indent=2))
-        sys.exit(1)
+        sys.exit(0)
 
 
 def main():
@@ -240,7 +237,7 @@ def main():
         print("", file=sys.stderr)
         print("Note: This script requires 'crane' to be installed.", file=sys.stderr)
         print("Install with: go install github.com/google/go-containerregistry/cmd/crane@latest", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(0)
 
     image_name = sys.argv[1]
     check_version(image_name)

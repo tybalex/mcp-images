@@ -53,7 +53,7 @@ jobs:
           python-version: "3.13"
 
       - name: Create venv and install deps
-        if: ${{ matrix.type == 'python' }}
+        if: ${{ matrix.type == 'python' || matrix.type == 'docker' }}
         run: |
           cd scripts/check-versions
           python -m venv .venv
