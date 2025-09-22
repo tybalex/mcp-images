@@ -13,7 +13,7 @@ on:
       - main
     paths:
       - repackaging/images.yaml
-      - check-*-version.*
+      - scripts/check-versions/*
 
 jobs:
   generate-matrix:
@@ -52,20 +52,30 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Create venv and install deps
+        if: ${{ matrix.type == 'python' }}
+        run: |
+          cd scripts/check-versions
+          python -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Setup crane
+        if: ${{ matrix.type == 'docker' }}
         uses: imjasonh/setup-crane@v0.4
 
       - name: Check npm package version
         id: check-npm
         if: ${{ matrix.type == 'node' }}
         run: |
-          result=$(node scripts/check-npm-version.js "${{ matrix.package }}" "${{ matrix.version }}")
+          result=$(node scripts/check-versions/check-npm-version.js "${{ matrix.package }}" "${{ matrix.version }}")
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
           # Store exit code
-          if node scripts/check-npm-version.js "${{ matrix.package }}" "${{ matrix.version }}" > /dev/null 2>&1; then
+          if node scripts/check-versions/check-npm-version.js "${{ matrix.package }}" "${{ matrix.version }}" > /dev/null 2>&1; then
             echo "has_update=true" >> $GITHUB_OUTPUT
           else
             echo "has_update=false" >> $GITHUB_OUTPUT
@@ -75,13 +85,17 @@ jobs:
         id: check-pypi
         if: ${{ matrix.type == 'python' }}
         run: |
-          result=$(python scripts/check-pypi-version.py "${{ matrix.package }}" "${{ matrix.version }}")
+          cd scripts/check-versions
+          python -m venv .venv
+          . .venv/bin/activate
+
+          result=$(python check-pypi-version.py "${{ matrix.package }}" "${{ matrix.version }}")
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
           # Store exit code
-          if python scripts/check-pypi-version.py "${{ matrix.package }}" "${{ matrix.version }}" > /dev/null 2>&1; then
+          if python check-pypi-version.py "${{ matrix.package }}" "${{ matrix.version }}" > /dev/null 2>&1; then
             echo "has_update=true" >> $GITHUB_OUTPUT
           else
             echo "has_update=false" >> $GITHUB_OUTPUT
@@ -91,13 +105,17 @@ jobs:
         id: check-docker
         if: ${{ matrix.type == 'docker' }}
         run: |
-          result=$(python scripts/check-docker-version.py "${{ matrix.package }}:${{ matrix.version }}")
+          cd scripts/check-versions
+          python -m venv .venv
+          . .venv/bin/activate
+
+          result=$(python check-docker-version.py "${{ matrix.package }}:${{ matrix.version }}")
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
           # Store exit code
-          if python scripts/check-docker-version.py "${{ matrix.package }}:${{ matrix.version }}" > /dev/null 2>&1; then
+          if python check-docker-version.py "${{ matrix.package }}:${{ matrix.version }}" > /dev/null 2>&1; then
             echo "has_update=true" >> $GITHUB_OUTPUT
           else
             echo "has_update=false" >> $GITHUB_OUTPUT
