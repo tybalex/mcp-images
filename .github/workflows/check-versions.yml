@@ -272,6 +272,31 @@ jobs:
                 labels: ['version-update', `package:${packageName}`, `type:${packageType}`, 'automated']
               });
 
+              // Add reviewers (configure these using repository variables)
+              const reviewers = '${{ vars.PR_REVIEWERS }}'.split(',').map(r => r.trim()).filter(r => r);
+              const teamReviewers = '${{ vars.PR_TEAM_REVIEWERS }}'.split(',').map(t => t.trim()).filter(t => t);
+
+              if (reviewers.length > 0 || teamReviewers.length > 0) {
+                try {
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: pr.data.number,
+                    reviewers: reviewers,
+                    team_reviewers: teamReviewers
+                  });
+                  if (reviewers.length > 0) {
+                    console.log(`Added reviewers to PR #${pr.data.number}: ${reviewers.join(', ')}`);
+                  }
+                  if (teamReviewers.length > 0) {
+                    console.log(`Added team reviewers to PR #${pr.data.number}: ${teamReviewers.join(', ')}`);
+                  }
+                } catch (reviewerError) {
+                  console.warn(`Could not add reviewers to PR #${pr.data.number}:`, reviewerError.message);
+                  // Don't fail the entire workflow if reviewer assignment fails
+                }
+              }
+
               console.log(`Created pull request #${pr.data.number} for ${packageName} update`);
 
             } catch (error) {
