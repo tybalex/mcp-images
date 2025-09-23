@@ -173,3 +173,12 @@ jobs:
           artifact-name: sbom-${{ matrix.name }}-${{ matrix.version }}.spdx.json
           dependency-snapshot: true
           upload-artifact-retention: 90
+
+      - name: trigger catalog update
+        if: steps.check-image.outputs.exists == 'true'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.DISPATCH_PAT }}
+          repository: obot-platform/mcp-catalog
+          event-type: update-image-tag
+          client-payload: '{"image_name":"ghcr.io/${{ github.repository }}/${{ matrix.name }}","new_tag":"${{ matrix.version }}"}'
