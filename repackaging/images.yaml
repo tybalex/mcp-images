@@ -104,8 +104,3 @@ images:
     package: tavily-mcp
     version: 0.2.9
     command: "tavily-mcp"
-  - name: wordpress
-    type: node
-    package: "@automattic/mcp-wordpress-remote"
-    version: 0.2.10
-    command: "mcp-wordpress-remote"
