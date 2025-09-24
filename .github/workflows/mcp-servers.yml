@@ -6,6 +6,7 @@ permissions:
   actions: read
   security-events: write
 on:
+  workflow_call:
   workflow_dispatch:
   push:
     branches:
@@ -25,6 +26,7 @@ jobs:
           - tableau
           - snowflake
           - elasticsearch
+          - googlecloudrun
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code

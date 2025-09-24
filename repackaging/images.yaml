@@ -7,7 +7,7 @@ images:
   - name: atlassian
     type: docker
     package: ghcr.io/sooperset/mcp-atlassian
-    version: latest
+    version: 0.11.9
     command: --transport streamable-http --port 9000
   - name: aws-cdk
     type: python
@@ -17,7 +17,7 @@ images:
   - name: aws-documentation
     type: python
     package: awslabs.aws-documentation-mcp-server
-    version: 1.1.6
+    version: 1.1.7
     command: "awslabs.aws-documentation-mcp-server"
   - name: aws-eks
     type: python
@@ -32,7 +32,7 @@ images:
   - name: aws-redshift
     type: python
     package: awslabs.redshift-mcp-server
-    version: 0.0.7
+    version: 0.0.8
     command: "awslabs.redshift-mcp-server"
   - name: azure
     type: node
@@ -69,6 +69,10 @@ images:
     package: firecrawl-mcp
     version: 2.0.2
     command: "firecrawl-mcp"
+  - name: gitlab
+    type: node
+    package: "@zereight/mcp-gitlab"
+    version: 2.0.4
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
@@ -104,3 +108,8 @@ images:
     package: tavily-mcp
     version: 0.2.9
     command: "tavily-mcp"
+  - name: digitalocean
+    type: node
+    package: "@digitalocean/mcp"
+    version: 1.0.10
+    command: "mcp --services ${ENABLED_SERVICES}"

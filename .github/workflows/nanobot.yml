@@ -1,7 +1,7 @@
 name: Build and Push Nanobot Base Image
 permissions:
   id-token: write
-  contents: read
+  contents: write
   packages: write
   actions: read
   security-events: write
@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Checkout nanobot
+        uses: actions/checkout@v4
+        with:
+          repository: nanobot-ai/nanobot
+          path: nanobot
       - name: Setup Depot
         uses: depot/setup-action@v1
       - name: Log in to GitHub Container Registry
@@ -34,6 +39,8 @@ jobs:
         id: build-and-push
         with:
           project: bbqjs4tj1g
+          build-contexts: |
+            nanobot=./nanobot
           context: .
           push: true
           pull: true
@@ -75,3 +82,15 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-results-nanobot.sarif
+
+  build-base-images:
+    needs: docker-build
+    uses: obot-platform/mcp-images/.github/workflows/base-images.yml@main
+
+  build-mcp-servers-images:
+    needs: build-base-images
+    uses: obot-platform/mcp-images/.github/workflows/mcp-servers.yml@main
+
+  build-repackaged-images:
+    needs: build-base-images
+    uses: obot-platform/mcp-images/.github/workflows/repackage.yml@main
