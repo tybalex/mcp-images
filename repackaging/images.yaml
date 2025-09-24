@@ -113,3 +113,8 @@ images:
     package: "@digitalocean/mcp"
     version: 1.0.10
     command: "mcp --services ${ENABLED_SERVICES}"
+  - name: dynatrace
+    type: node
+    package: "@dynatrace-oss/dynatrace-mcp-server"
+    version: 0.6.0
+    command: "dynatrace-mcp-server"
