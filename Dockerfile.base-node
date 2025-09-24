@@ -1,4 +1,4 @@
-FROM ghcr.io/obot-platform/mcp-images/nanobot:main
+FROM cgr.dev/chainguard/wolfi-base:latest
 
 USER root
 
