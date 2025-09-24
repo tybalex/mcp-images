@@ -3,72 +3,58 @@ images:
     type: node
     package: "@antv/mcp-server-chart"
     version: 0.8.3
-    command: mcp-server-chart --transport streamable --endpoint "/" --port 1122
   - name: atlassian
     type: docker
     package: ghcr.io/sooperset/mcp-atlassian
     version: 0.11.9
-    command: --transport streamable-http --port 9000
   - name: aws-cdk
     type: python
     package: awslabs.cdk-mcp-server
     version: 1.0.7
-    command: "awslabs.cdk-mcp-server"
   - name: aws-documentation
     type: python
     package: awslabs.aws-documentation-mcp-server
     version: 1.1.7
-    command: "awslabs.aws-documentation-mcp-server"
   - name: aws-eks
     type: python
     package: awslabs.eks-mcp-server
     version: 0.1.13
-    command: awslabs.eks-mcp-server --allow-write --allow-sensitive-data-access
   - name: aws-kendra
     type: python
     package: awslabs.amazon-kendra-index-mcp-server
     version: 1.0.6
-    command: "awslabs.amazon-kendra-index-mcp-server"
   - name: aws-redshift
     type: python
     package: awslabs.redshift-mcp-server
     version: 0.0.8
-    command: "awslabs.redshift-mcp-server"
   - name: azure
     type: node
     package: "@azure/mcp"
     version: 0.8.1
-    command: azmcp server start
   - name: browserbase
     type: node
     package: "@browserbasehq/mcp-server-browserbase"
     version: 2.0.1
-    command: "mcp-server-browserbase"
   - name: context7
     type: node
     package: "@upstash/context7-mcp"
     version: 1.0.16
-    command: "context7-mcp"
   - name: datadog
     type: node
     package: "@winor30/mcp-server-datadog"
     version: latest
-    command: "mcp-server-datadog"
   - name: duckduckgo-search
     type: python
     package: duckduckgo-mcp-server
     version: 0.1.1
-    command: "duckduckgo-mcp-server"
   - name: exa-search
     type: node
     package: exa-mcp-server
     version: 2.0.5
-    command: exa-mcp-server --tools=web_search_exa,research_paper_search,company_research,crawling,competitor_finder,linkedin_search,wikipedia_search_exa,github_search
   - name: firecrawl
     type: node
     package: firecrawl-mcp
     version: 2.0.2
-    command: "firecrawl-mcp"
   - name: gitlab
     type: node
     package: "@zereight/mcp-gitlab"
@@ -77,44 +63,35 @@ images:
     type: node
     package: mongodb-mcp-server
     version: 0.3.0
-    command: mongodb-mcp-server --transport http --httpPort 3000 --disabledTools mongodb
   - name: mongodb-database
     type: node
     package: mongodb-mcp-server
     version: 0.3.0
-    command: mongodb-mcp-server --transport http --httpPort 3000 --connectionString ${CONNECTION_STRING}
   - name: mysql-mcp-server
     type: python
     package: mysql-mcp-server
     version: 0.2.2
-    command: mysql_mcp_server
   - name: playwright
     type: node
     package: "@playwright/mcp"
     version: 0.0.35
-    command: "mcp-server-playwright"
   - name: postgresql
     type: python
     package: postgres-mcp
     version: 0.3.0
-    command: postgres-mcp --accessMode=unrestricted
   - name: supabase
     type: node
     package: "@supabase/mcp-server-supabase"
     version: 0.5.1
-    command: "mcp-server-supabase"
   - name: tavily
     type: node
     package: tavily-mcp
     version: 0.2.9
-    command: "tavily-mcp"
   - name: digitalocean
     type: node
     package: "@digitalocean/mcp"
     version: 1.0.10
-    command: "mcp --services ${ENABLED_SERVICES}"
   - name: dynatrace
     type: node
     package: "@dynatrace-oss/dynatrace-mcp-server"
     version: 0.6.0
-    command: "dynatrace-mcp-server"
