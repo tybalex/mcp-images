@@ -6,7 +6,7 @@ RUN apk add make git nodejs npm pnpm
 
 RUN npm install -g npm
 
-RUN chown -R 1000:1000 "/home/user/.npm"
+RUN mkdir -p /home/user/.npm && chown -R 1000:1000 "/home/user/.npm"
 
 # Setup chrome for things like Playwright
 RUN mkdir -p /opt/google/chrome && \
