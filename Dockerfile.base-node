@@ -15,8 +15,11 @@ RUN mkdir -p /opt/google/chrome && \
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
+RUN mkdir -p /home/user/.local/bin && \
+chown -R 1000:0 /home/user && \
+chown -R 1000:0 /usr/local
+
 USER 1000
 
-RUN mkdir -p /home/user/.local/bin
 ENV HOME=/home/user
 ENV PATH="/home/user/.local/bin:$PATH"

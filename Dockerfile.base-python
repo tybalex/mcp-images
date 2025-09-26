@@ -11,8 +11,11 @@ ENV UV_LINK_MODE=copy
 
 RUN python -m ensurepip && pip3 install uv
 
+RUN mkdir -p /home/user/.local/bin && \
+chown -R 1000:0 /home/user && \
+chown -R 1000:0 /usr/local
+
 USER 1000
 
-RUN mkdir -p /home/user/.local/bin
 ENV HOME=/home/user
 ENV PATH="/home/user/.local/bin:$PATH"
