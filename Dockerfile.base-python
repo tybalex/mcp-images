@@ -1,15 +1,8 @@
-FROM ghcr.io/obot-platform/mcp-images/nanobot:main
+FROM cgr.dev/chainguard/wolfi-base:latest
 
 USER root
 
 RUN apk add make git python3
-
-# Setup chrome for things like Playwright
-RUN mkdir -p /opt/google/chrome && \
-    apk add chromium && \
-    ln -sf /usr/bin/chromium-browser /opt/google/chrome/chrome
-
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Enable bytecode compilation
 ENV UV_COMPILE_BYTECODE=1

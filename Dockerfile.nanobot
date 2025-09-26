@@ -1,3 +1,4 @@
+ARG BASE_IMAGE=
 FROM cgr.dev/chainguard/wolfi-base AS bin
 
 RUN apk add --no-cache gcc=14.2.0-r13 go make git
@@ -9,7 +10,9 @@ RUN --mount=type=bind,from=nanobot,target=/mnt/nanobot,rw \
   make build && \
   cp /mnt/nanobot/bin/nanobot /nanobot
 
-FROM cgr.dev/chainguard/wolfi-base:latest
+FROM ${BASE_IMAGE}
+
+USER root
 
 COPY --from=bin /nanobot /usr/local/bin/
 
