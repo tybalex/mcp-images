@@ -4,9 +4,7 @@ FROM ghcr.io/obot-platform/mcp-images/base-python:${BASE_TAG}
 ARG MCP_PACKAGE
 ARG MCP_VERSION
 
-USER root
+USER 1000
 
 # Install the MCP package using uvx
 RUN uv tool install "${MCP_PACKAGE}@${MCP_VERSION}"
-
-USER 1000
