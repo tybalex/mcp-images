@@ -115,7 +115,7 @@ jobs:
       - name: Build final image
         if: ${{ matrix.type == 'node' || matrix.type == 'python' }}
         uses: depot/build-push-action@v1
-        id: build-node
+        id: build-final
         with:
           project: bbqjs4tj1g
           context: .
@@ -144,25 +144,10 @@ jobs:
         with:
           cosign-release: "v2.4.3"
 
-      - name: Sign python image
-        if: ${{ matrix.type == 'python' && steps.check-image.outputs.exists == 'false' }}
-        env:
-          DIGEST: ${{ steps.build-python.outputs.digest }}
-          TAGS: |
-            ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
-        run: |
-          images=""
-          for tag in ${TAGS}; do
-            if [ -n "$tag" ]; then
-              images+="${tag}@${DIGEST} "
-            fi
-          done
-          cosign sign --yes ${images}
-
-      - name: Sign node image
+      - name: Sign image
         if: ${{ matrix.type == 'node' && steps.check-image.outputs.exists == 'false' }}
         env:
-          DIGEST: ${{ steps.build-node.outputs.digest }}
+          DIGEST: ${{ steps.build-final.outputs.digest }}
           TAGS: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
         run: |
@@ -175,7 +160,7 @@ jobs:
           cosign sign --yes ${images}
 
       - name: Run Trivy
-        if: steps.check-image.outputs.exists == 'true' || steps.build-python.outputs.digest != '' || steps.build-node.outputs.digest != ''
+        if: steps.check-image.outputs.exists == 'true' || steps.build-final.outputs.digest != ''
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
@@ -184,7 +169,7 @@ jobs:
           output: "trivy-results-${{ matrix.name }}-${{ matrix.version }}.sarif"
 
       - name: Upload SARIF file
-        if: steps.check-image.outputs.exists == 'true' || steps.build-python.outputs.digest != '' || steps.build-node.outputs.digest != ''
+        if: steps.check-image.outputs.exists == 'true' || steps.build-final.outputs.digest != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           category: trivy-${{ matrix.name }}-${{ matrix.version }}
