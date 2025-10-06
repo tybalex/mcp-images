@@ -26,11 +26,11 @@ images:
   - name: aws-redshift
     type: python
     package: awslabs.redshift-mcp-server
-    version: 0.0.8
+    version: 0.0.9
   - name: azure
     type: node
     package: "@azure/mcp"
-    version: 0.8.2
+    version: 0.8.4
   - name: browserbase
     type: node
     package: "@browserbasehq/mcp-server-browserbase"
@@ -74,7 +74,7 @@ images:
   - name: playwright
     type: node
     package: "@playwright/mcp"
-    version: 0.0.40
+    version: 0.0.41
   - name: postgresql
     type: python
     package: postgres-mcp
@@ -91,6 +91,10 @@ images:
     type: node
     package: "@digitalocean/mcp"
     version: 1.0.11
+  - name: brave-search
+    type: node
+    package: "@brave/brave-search-mcp-server"
+    version: 2.0.24
   - name: dynatrace
     type: node
     package: "@dynatrace-oss/dynatrace-mcp-server"
