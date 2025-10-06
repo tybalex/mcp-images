@@ -103,3 +103,7 @@ images:
     type: python
     package: redis-mcp-server
     version: 0.3.0
+  - name: ref
+    type: node
+    package: ref-tools-mcp
+    version: 3.0.1
