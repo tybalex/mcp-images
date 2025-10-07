@@ -62,7 +62,7 @@ images:
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
-    version: 0.3.0
+    version: 1.0.2
   - name: mongodb-database
     type: node
     package: mongodb-mcp-server
