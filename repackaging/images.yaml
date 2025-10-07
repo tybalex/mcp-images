@@ -91,6 +91,10 @@ images:
     type: node
     package: "@digitalocean/mcp"
     version: 1.0.10
+  - name: markitdown-mcp
+    type: python
+    package: markitdown-mcp
+    version: 0.0.1a4
   - name: dynatrace
     type: node
     package: "@dynatrace-oss/dynatrace-mcp-server"
