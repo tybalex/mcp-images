@@ -7,6 +7,10 @@ images:
     type: docker
     package: ghcr.io/sooperset/mcp-atlassian
     version: 0.11.9
+  - name: aws-api
+    type: python
+    package: awslabs.aws-api-mcp-server
+    version: 1.0.1
   - name: aws-cdk
     type: python
     package: awslabs.cdk-mcp-server
