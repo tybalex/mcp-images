@@ -87,10 +87,6 @@ images:
     type: node
     package: "@supabase/mcp-server-supabase"
     version: 0.5.1
-  - name: tavily
-    type: node
-    package: tavily-mcp
-    version: 0.2.9
   - name: digitalocean
     type: node
     package: "@digitalocean/mcp"
