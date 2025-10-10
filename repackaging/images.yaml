@@ -98,7 +98,7 @@ images:
   - name: dynatrace
     type: node
     package: "@dynatrace-oss/dynatrace-mcp-server"
-    version: 0.6.1
+    version: 0.9.1
   - name: redis
     type: python
     package: redis-mcp-server
