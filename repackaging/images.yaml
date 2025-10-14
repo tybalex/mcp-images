@@ -35,6 +35,10 @@ images:
     type: node
     package: "@browserbasehq/mcp-server-browserbase"
     version: 2.1.2
+  - name: chroma
+    type: python
+    package: chroma-mcp
+    version: 0.2.6
   - name: context7
     type: node
     package: "@upstash/context7-mcp"
