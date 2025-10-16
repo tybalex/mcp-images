@@ -34,7 +34,7 @@ images:
   - name: azure
     type: node
     package: "@azure/mcp"
-    version: 0.9.1
+    version: 0.9.2
   - name: browserbase
     type: node
     package: "@browserbasehq/mcp-server-browserbase"
