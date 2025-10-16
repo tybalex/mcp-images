@@ -79,6 +79,10 @@ images:
     type: python
     package: mysql-mcp-server
     version: 0.2.2
+  - name: pagerduty
+    type: python
+    package: pagerduty-mcp
+    version: 0.2.1
   - name: playwright
     type: node
     package: "@playwright/mcp"
