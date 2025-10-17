@@ -66,7 +66,7 @@ images:
   - name: mongodb-database
     type: node
     package: mongodb-mcp-server
-    version: 0.3.0
+    version: 1.1.0
   - name: mysql-mcp-server
     type: python
     package: mysql-mcp-server
