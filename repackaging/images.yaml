@@ -2,7 +2,7 @@ images:
   - name: antv-charts
     type: node
     package: "@antv/mcp-server-chart"
-    version: 0.8.3
+    version: 0.9.1
   - name: atlassian
     type: docker
     package: ghcr.io/sooperset/mcp-atlassian
@@ -10,11 +10,11 @@ images:
   - name: aws-api
     type: python
     package: awslabs.aws-api-mcp-server
-    version: 1.0.1
+    version: 1.0.2
   - name: aws-cdk
     type: python
     package: awslabs.cdk-mcp-server
-    version: 1.0.7
+    version: 1.0.8
   - name: aws-documentation
     type: python
     package: awslabs.aws-documentation-mcp-server
@@ -30,7 +30,7 @@ images:
   - name: aws-redshift
     type: python
     package: awslabs.redshift-mcp-server
-    version: 0.0.9
+    version: 0.0.10
   - name: azure
     type: node
     package: "@azure/mcp"
@@ -46,7 +46,7 @@ images:
   - name: context7
     type: node
     package: "@upstash/context7-mcp"
-    version: 1.0.20
+    version: 1.0.21
   - name: datadog
     type: node
     package: "@winor30/mcp-server-datadog"
@@ -62,7 +62,7 @@ images:
   - name: firecrawl
     type: node
     package: firecrawl-mcp
-    version: 3.3.6
+    version: 3.4.0
   - files-com
     type: python
     package: files-com-mcp
@@ -70,7 +70,7 @@ images:
   - name: gitlab
     type: node
     package: "@zereight/mcp-gitlab"
-    version: 2.0.4
+    version: 2.0.7
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
@@ -98,7 +98,7 @@ images:
   - name: supabase
     type: node
     package: "@supabase/mcp-server-supabase"
-    version: 0.5.1
+    version: 0.5.6
   - name: digitalocean
     type: node
     package: "@digitalocean/mcp"
@@ -118,4 +118,4 @@ images:
   - name: redis
     type: python
     package: redis-mcp-server
-    version: 0.3.1
+    version: 0.3.4
