@@ -115,3 +115,7 @@ images:
     type: python
     package: redis-mcp-server
     version: 0.3.1
+  - name: terraform
+    type: docker
+    package: hashicorp/terraform-mcp-server
+    version: 0.3.1
