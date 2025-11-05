@@ -71,6 +71,10 @@ images:
     type: node
     package: "@zereight/mcp-gitlab"
     version: 2.0.7
+  - name: grafana
+    type: docker
+    package: "mcp/grafana"
+    version: 0.7.8
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
