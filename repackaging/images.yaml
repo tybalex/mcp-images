@@ -74,7 +74,7 @@ images:
   - name: grafana
     type: docker
     package: "mcp/grafana"
-    version: 0.7.8
+    version: latest
   - name: mongodb-atlas
     type: node
     package: mongodb-mcp-server
