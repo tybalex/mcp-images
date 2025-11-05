@@ -1,4 +1,4 @@
-name: Build and Push Base Images
+name: Build and Push Phat Image
 permissions:
   id-token: write
   contents: read
@@ -14,16 +14,14 @@ on:
     tags:
       - "v*"
     paths:
-      - Dockerfile.base-python
-      - Dockerfile.base-node
+      - Dockerfile.phat
 jobs:
   docker-build:
     strategy:
       fail-fast: false
       matrix:
         image-identifier:
-          - base-python
-          - base-node
+          - phat
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code

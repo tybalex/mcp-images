@@ -1,4 +1,4 @@
-name: Build and Push Base Images
+name: Build and Push Nanobot Image
 permissions:
   id-token: write
   contents: read
@@ -14,16 +14,14 @@ on:
     tags:
       - "v*"
     paths:
-      - Dockerfile.base-python
-      - Dockerfile.base-node
+      - Dockerfile.nanobot
 jobs:
   docker-build:
     strategy:
       fail-fast: false
       matrix:
         image-identifier:
-          - base-python
-          - base-node
+          - nanobot
     runs-on: depot-ubuntu-22.04
     steps:
       - name: Checkout code
@@ -82,3 +80,10 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: trivy-results-${{ matrix.image-identifier }}.sarif
+  build-phat-image:
+    needs: docker-build
+    runs-on: depot-ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: ./.github/workflows/phat-image.yml
