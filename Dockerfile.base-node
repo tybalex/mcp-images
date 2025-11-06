@@ -4,7 +4,7 @@ USER root
 
 RUN apk add make git nodejs npm pnpm
 
-RUN npm install -g npm
+RUN npm install -g npm && npm cache clean --force
 
 RUN mkdir -p /home/user/.npm && chown -R 1000:1000 "/home/user/.npm"
 
