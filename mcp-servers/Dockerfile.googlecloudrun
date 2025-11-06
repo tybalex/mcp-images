@@ -18,7 +18,8 @@ WORKDIR /app
 
 # Copy package files and install production dependencies
 COPY --from=builder /app/package.json /app/package-lock.json ./
-RUN npm install --omit=dev --production
+RUN npm install --omit=dev --production && \
+    npm cache clean --force
 
 # Copy application files
 COPY --from=builder /app .

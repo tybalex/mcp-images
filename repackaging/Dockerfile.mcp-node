@@ -6,7 +6,8 @@ ARG MCP_VERSION
 
 USER root
 
-# Install the MCP package globally
-RUN npm install -g "${MCP_PACKAGE}@${MCP_VERSION}"
+# Install the MCP package globally and clean npm cache to avoid security alerts
+RUN npm install -g "${MCP_PACKAGE}@${MCP_VERSION}" && \
+    npm cache clean --force
 
 USER 1000
