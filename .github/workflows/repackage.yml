@@ -164,9 +164,7 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ghcr.io/${{ github.repository }}/${{ matrix.name }}:${{ matrix.version }}
-          skip-dirs: |
-            **/venv
-            **/.local/share/uv/tools
+          skip-dirs: "**/venv,**/.local/share/uv/tools"
           format: "sarif"
           output: "trivy-results-${{ matrix.name }}-${{ matrix.version }}.sarif"
 
