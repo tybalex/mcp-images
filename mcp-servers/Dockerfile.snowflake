@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+FROM ghcr.io/astral-sh/uv:python3.12-trixie AS builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ ENV UV_LINK_MODE=copy
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev
 
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS runner
+FROM ghcr.io/astral-sh/uv:python3.12-trixie AS runner
 
 WORKDIR /app
 

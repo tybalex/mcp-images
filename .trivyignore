@@ -1,0 +1,2 @@
+# False positive - MiniZip not built in Debian Bookworm's zlib1g, see reference https://nvd.nist.gov/vuln/detail/CVE-2023-45853 and https://security-tracker.debian.org/tracker/CVE-2023-45853
+CVE-2023-45853
