@@ -28,7 +28,7 @@ jobs:
       - name: Generate matrix from images.yaml
         id: set-matrix
         run: |
-          matrix=$(yq eval -o=json '.images[] |select(.type != null) |= pick(["name", "type", "package","version"])' repackaging/images.yaml |jq -cs .)
+          matrix=$(yq eval -o=json '.images[] |select(.type != null) |= pick(["name", "type", "package","version","constraints"])' repackaging/images.yaml |jq -cs .)
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
 
   repackage:
@@ -84,6 +84,7 @@ jobs:
             MCP_PACKAGE=${{ matrix.package }}
             MCP_VERSION=${{ matrix.version }}
             BASE_TAG=main
+            MCP_CONSTRAINTS=${{ join(matrix.constraints, ' ') }}
           tags: |
             ghcr.io/${{ github.repository }}/${{ matrix.name }}-base:${{ matrix.version }}
 
