@@ -39,8 +39,6 @@ images:
     type: python
     package: chroma-mcp
     version: 0.2.6
-    constraints:
-      - "mcp>=1.10.0"
   - name: context7
     type: node
     package: "@upstash/context7-mcp"
@@ -65,8 +63,6 @@ images:
     type: python
     package: files-com-mcp
     version: 1.0.40
-    constraints:
-      - "fastmcp>=2.13.0"
   - name: gitlab
     type: node
     package: "@zereight/mcp-gitlab"
@@ -113,7 +109,6 @@ images:
     version: 0.0.1a4
     constraints:
       - "mammoth~=1.11.0"
-      - "mcp>=1.10.0"
   - name: brave-search
     type: node
     package: "@brave/brave-search-mcp-server"
