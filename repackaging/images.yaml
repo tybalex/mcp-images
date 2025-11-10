@@ -107,6 +107,8 @@ images:
     type: python
     package: markitdown-mcp
     version: 0.0.1a4
+    constraints:
+      - "mammoth~=1.11.0"
   - name: brave-search
     type: node
     package: "@brave/brave-search-mcp-server"

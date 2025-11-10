@@ -3,8 +3,20 @@ FROM ghcr.io/obot-platform/mcp-images/base-python:${BASE_TAG}
 
 ARG MCP_PACKAGE
 ARG MCP_VERSION
+ARG MCP_CONSTRAINTS=""
 
 USER 1000
 
-# Install the MCP package using uvx
-RUN uv tool install "${MCP_PACKAGE}@${MCP_VERSION}"
+# Install the MCP package using uv with optional dependency constraints
+RUN if [ -n "$MCP_CONSTRAINTS" ]; then \
+        # Convert newline-separated constraints to space-separated --with flags
+        CONSTRAINTS_ARGS=""; \
+        for constraint in $MCP_CONSTRAINTS; do \
+            if [ -n "$constraint" ]; then \
+                CONSTRAINTS_ARGS="$CONSTRAINTS_ARGS --with '$constraint'"; \
+            fi; \
+        done; \
+        eval "uv tool install '${MCP_PACKAGE}@${MCP_VERSION}' $CONSTRAINTS_ARGS"; \
+    else \
+        uv tool install "${MCP_PACKAGE}@${MCP_VERSION}"; \
+    fi
