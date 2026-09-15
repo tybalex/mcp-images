@@ -106,7 +106,7 @@ images:
   - name: markitdown-mcp
     type: python
     package: markitdown-mcp
-    version: 0.0.1a4
+    version: 0.0.1a7
     constraints:
       - "mammoth~=1.11.0"
   - name: brave-search
